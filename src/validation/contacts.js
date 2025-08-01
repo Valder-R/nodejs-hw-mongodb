@@ -1,9 +1,56 @@
 import Joi from "joi";
 
 export const createContactShema = Joi.object({
-    name: Joi.string().min(3).max(20).required(),
-    phoneNumber: Joi.string().min(3).max(20).required(),
-    email: Joi.string().min(3).max(20),
-    isFavourite: Joi.boolean().default(false),
-    contactType: Joi.string().valid('work', 'home', 'personal').default('personal').required(),
+    name: Joi.string().min(3).max(20).required().messages({
+        'string.base': 'Username should be a string',
+        'string.min': 'Username should have at least {#limit} characters',
+        'string.max': 'Username should have at most {#limit} characters',
+        'any.required': 'Username is required',
+    }),
+    phoneNumber: Joi.string().min(3).max(20).required().messages({
+        'string.base': 'Phone number should be a string',
+        'string.min': 'Phone number should have at least {#limit} characters',
+        'string.max': 'Phone number should have at most {#limit} characters',
+        'any.required': 'Phone number is required',
+    }),
+    email: Joi.string().email().min(3).max(20).messages({
+        'string.base': 'Email should be a string',
+        'string.email': 'The string is not a valid e-mail',
+        'string.min': 'Email should have at least {#limit} characters',
+        'string.max': 'Email should have at most {#limit} characters',
+    }),
+    isFavourite: Joi.boolean().default(false).messages({
+        'boolean.base': 'isFavourite should be a boolean',
+    }),
+    contactType: Joi.string().valid('work', 'home', 'personal').default('personal').required().messages({
+        'string.base': 'Contact type should be a string',
+        'any.only': 'Contact type didn`t match any allowed values',
+        'any.required': 'Contact type is required',
+    }),
+});
+
+export const editContactShema = Joi.object({
+    name: Joi.string().min(3).max(20).messages({
+        'string.base': 'Username should be a string',
+        'string.min': 'Username should have at least {#limit} characters',
+        'string.max': 'Username should have at most {#limit} characters',
+    }),
+    phoneNumber: Joi.string().min(3).max(20).messages({
+        'string.base': 'Phone number should be a string',
+        'string.min': 'Phone number should have at least {#limit} characters',
+        'string.max': 'Phone number should have at most {#limit} characters',
+    }),
+    email: Joi.string().email().min(3).max(20).messages({
+        'string.base': 'Email should be a string',
+        'string.email': 'The string is not a valid e-mail',
+        'string.min': 'Email should have at least {#limit} characters',
+        'string.max': 'Email should have at most {#limit} characters',
+    }),
+    isFavourite: Joi.boolean().default(false).messages({
+        'boolean.base': 'isFavourite should be a boolean',
+    }),
+    contactType: Joi.string().valid('work', 'home', 'personal').default('personal').messages({
+        'string.base': 'Contact type should be a string',
+        'any.only': 'Contact type didn`t match any allowed values',
+    }),
 });
