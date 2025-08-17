@@ -220,7 +220,7 @@
                     "example": true
                   },
                   "contactType": {
-                    "description": "Contact's Ttype",
+                    "description": "Contact's type",
                     "type": "string",
                     "enum": [
                       "work",
@@ -383,7 +383,7 @@
                     "example": true
                   },
                   "contactType": {
-                    "description": "Contact's Ttype",
+                    "description": "Contact's type",
                     "type": "string",
                     "enum": [
                       "work",
